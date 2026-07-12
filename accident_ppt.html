@@ -1,0 +1,445 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Road Accident Severity & Safety Hotspot Analyzer — Presentation</title>
+  <style>
+    body { margin: 0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; background:#0b1020; color:#eaf0ff; }
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 28px 20px 64px; }
+    .deck { background: radial-gradient(1200px 600px at 20% 0%, rgba(80,140,255,0.25), transparent 60%),
+                    radial-gradient(900px 500px at 90% 10%, rgba(0,220,170,0.18), transparent 55%),
+                    rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); border-radius: 18px; overflow:hidden; }
+    .slide { display:none; padding: 34px 34px 26px; min-height: 640px; position: relative; }
+    .slide.active { display:block; }
+    .topbar { position: sticky; top:0; background: rgba(11,16,32,0.75); backdrop-filter: blur(8px); border-bottom: 1px solid rgba(255,255,255,0.08); padding: 12px 18px; display:flex; align-items:center; justify-content:space-between; gap: 12px; }
+    .brand { display:flex; flex-direction:column; line-height:1.1; }
+    .brand b { font-size: 14px; letter-spacing:0.3px; }
+    .brand small { opacity:0.8; font-size: 12px; }
+    .controls { display:flex; gap:10px; align-items:center; }
+    button { cursor:pointer; border:1px solid rgba(255,255,255,0.16); background: rgba(255,255,255,0.06); color:#eaf0ff; padding:10px 12px; border-radius:12px; font-weight:600; }
+    button:hover { background: rgba(255,255,255,0.1); }
+    .kbd { font-size:12px; opacity:0.8; border:1px solid rgba(255,255,255,0.16); border-radius:10px; padding:6px 10px; }
+
+    h1 { margin: 0 0 12px; font-size: 40px; letter-spacing:-0.8px; }
+    h2 { margin: 0 0 12px; font-size: 30px; letter-spacing:-0.5px; }
+    p { margin: 10px 0; font-size: 18px; opacity:0.95; }
+    ul { margin: 10px 0 0 22px; font-size: 18px; }
+    li { margin: 8px 0; }
+
+    .grid2 { display:grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+    .card { background: rgba(255,255,255,0.045); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 18px 18px; }
+    .tag { display:inline-block; padding: 6px 10px; border-radius: 999px; border:1px solid rgba(255,255,255,0.16); background: rgba(255,255,255,0.06); font-size: 13px; font-weight:700; opacity:0.95; }
+    .muted { opacity:0.85; }
+
+    .img { width:100%; border-radius: 14px; border: 1px solid rgba(255,255,255,0.08); background: rgba(0,0,0,0.15); }
+
+    /* simple reveal animations */
+    .reveal { opacity: 0; transform: translateY(10px) scale(0.99); transition: opacity 700ms ease, transform 700ms ease; }
+    .reveal.on { opacity: 1; transform: translateY(0) scale(1); }
+
+    .footer { position:absolute; left:34px; right:34px; bottom:18px; display:flex; justify-content:space-between; gap: 12px; opacity:0.7; font-size: 13px; }
+    .progress { font-weight:700; }
+
+    .listcheck { list-style:none; padding-left:0; }
+    .listcheck li { display:flex; gap:10px; align-items:flex-start; }
+    .dot { width:10px; height:10px; margin-top:8px; border-radius:50%; background: rgba(0,220,170,0.95); box-shadow: 0 0 0 5px rgba(0,220,170,0.12); flex:0 0 auto; }
+
+    /* Print mode (optional) */
+    @media print { .topbar, .controls { display:none !important; } .slide { display:block !important; page-break-after:always; min-height:auto; } }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="brand">
+      <b>Road Accident Severity & Safety Hotspot Analyzer</b>
+      <small>Web-PPT (Reveal-style animations) • Use ←/→ or Space/Enter</small>
+    </div>
+    <div class="controls">
+      <div class="kbd">Slide: <span id="slideIndex">1</span>/<span id="slideTotal">10</span></div>
+      <button id="prevBtn">← Prev</button>
+      <button id="nextBtn">Next →</button>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="deck" id="deck">
+
+      <!-- 1 Title -->
+      <section class="slide active" data-on="0">
+        <div class="tag">DSAI • ML + Hotspot Analytics</div>
+        <h1 style="margin-top:14px;">Road Accident Severity &amp; Safety Hotspot Analyzer</h1>
+        <p class="muted">Predict accident severity + explain high-risk conditions + generate safety recommendations for decision-makers.</p>
+        <div class="grid2" style="margin-top:18px;">
+          <div class="card reveal"><b>Team</b><div style="height:10px"></div><p style="font-size:16px; margin:0; opacity:0.95;">Komal Kumari • Pallavi • Shruti Saini</p></div>
+          <div class="card reveal"><b>Dataset</b><div style="height:10px"></div><p style="font-size:16px; margin:0; opacity:0.95;">Kaggle: Road Accidents Severity (12,316 rows • 32 features)</p></div>
+        </div>
+        <div class="footer">
+          <span>Animation-ready web deck</span>
+          <span class="progress">Theme: Safety • Evidence • Action</span>
+        </div>
+      </section>
+
+      <!-- 2 Problem & Impact -->
+      <section class="slide" data-on="1">
+        <div class="tag">Motivation</div>
+        <h2 style="margin-top:14px;">Why this matters</h2>
+        <div class="grid2">
+          <div class="card reveal">
+            <b>Problem</b>
+            <ul class="listcheck">
+              <li><span class="dot"></span><span>Predict <b>Accident Severity</b> from driving + environment factors</span></li>
+              <li><span class="dot"></span><span>Identify <b>high-risk patterns</b> (hotspots)</span></li>
+              <li><span class="dot"></span><span>Explain <b>risk drivers</b> and propose <b>actions</b></span></li>
+            </ul>
+          </div>
+          <div class="card reveal">
+            <b>Real-world impact</b>
+            <ul>
+              <li>Traffic police &amp; safety authorities: targeted interventions</li>
+              <li>Emergency response: better resource allocation</li>
+              <li>Road planners: lighting/maintenance priorities</li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer">
+          <span>Goal: data-driven safety planning</span>
+          <span class="progress">Next: data &amp; workflow</span>
+        </div>
+      </section>
+
+      <!-- 3 Data -->
+      <section class="slide" data-on="2">
+        <div class="tag">Input Data</div>
+        <h2 style="margin-top:14px;">What the model learns from</h2>
+        <div class="grid2">
+          <div class="card reveal">
+            <b>Dataset</b>
+            <p style="margin-top:8px;">12,316 accident records • Target: <b>Accident_severity</b></p>
+            <p class="muted" style="font-size:16px;">Features include weather, road surface, light condition, driver age/experience, vehicle type, and cause of accident.</p>
+          </div>
+          <div class="card reveal">
+            <b>Cleaning &amp; Prep (from notebooks)</b>
+            <ul>
+              <li>Impute missing categorical values with mode</li>
+              <li>Impute missing numeric values with median</li>
+              <li>Label-encode categorical features</li>
+              <li>Stratified train/test split</li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer">
+          <span>Reliable pipeline → trustworthy patterns</span>
+          <span class="progress">Next: system workflow</span>
+        </div>
+      </section>
+
+      <!-- 4 Workflow -->
+      <section class="slide" data-on="3">
+        <div class="tag">System Workflow</div>
+        <h2 style="margin-top:14px;">From accidents → decisions</h2>
+        <div class="card reveal" style="padding:22px;">
+          <svg viewBox="0 0 900 290" width="100%" height="240" xmlns="http://www.w3.org/2000/svg" aria-label="workflow diagram">
+            <defs>
+              <linearGradient id="g" x1="0" x2="1">
+                <stop offset="0" stop-color="rgba(90,160,255,0.9)"/>
+                <stop offset="1" stop-color="rgba(0,220,170,0.9)"/>
+              </linearGradient>
+              <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+                <path d="M0,0 L12,6 L0,12 Z" fill="rgba(230,240,255,0.9)"/>
+              </marker>
+            </defs>
+            <g font-family="ui-sans-serif, system-ui" font-size="16" fill="rgba(234,240,255,0.95)">
+              <rect x="20" y="40" rx="16" ry="16" width="160" height="70" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.12)"/>
+              <text x="100" y="78" text-anchor="middle" font-weight="800">EDA</text>
+              <text x="100" y="100" text-anchor="middle" font-size="13" opacity="0.85">Patterns</text>
+
+              <rect x="200" y="40" rx="16" ry="16" width="190" height="70" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.12)"/>
+              <text x="295" y="78" text-anchor="middle" font-weight="800">Feature Prep</text>
+              <text x="295" y="100" text-anchor="middle" font-size="13" opacity="0.85">Encode + Split</text>
+
+              <rect x="410" y="40" rx="16" ry="16" width="200" height="70" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.12)"/>
+              <text x="510" y="78" text-anchor="middle" font-weight="800">Model</text>
+              <text x="510" y="100" text-anchor="middle" font-size="13" opacity="0.85">Random Forest</text>
+
+              <rect x="630" y="40" rx="16" ry="16" width="250" height="70" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.12)"/>
+              <text x="755" y="78" text-anchor="middle" font-weight="800">Evaluate</text>
+              <text x="755" y="100" text-anchor="middle" font-size="13" opacity="0.85">Metrics + CM</text>
+
+              <path d="M190 75 C200 75, 195 75, 200 75" stroke="rgba(230,240,255,0.65)" fill="none" marker-end="url(#arrow)"/>
+              <path d="M390 75 C400 75, 400 75, 410 75" stroke="rgba(230,240,255,0.65)" fill="none" marker-end="url(#arrow)"/>
+              <path d="M610 75 C620 75, 620 75, 630 75" stroke="rgba(230,240,255,0.65)" fill="none" marker-end="url(#arrow)"/>
+
+              <rect x="20" y="150" rx="16" ry="16" width="260" height="90" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.12)"/>
+              <text x="150" y="190" text-anchor="middle" font-weight="800">Hotspot Analysis</text>
+              <text x="150" y="215" text-anchor="middle" font-size="13" opacity="0.85">Weather + Road + Light</text>
+
+              <rect x="310" y="150" rx="16" ry="16" width="290" height="90" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.12)"/>
+              <text x="455" y="190" text-anchor="middle" font-weight="800">Risk Drivers</text>
+              <text x="455" y="215" text-anchor="middle" font-size="13" opacity="0.85">Top features &amp; causes</text>
+
+              <rect x="620" y="150" rx="16" ry="16" width="280" height="90" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.12)"/>
+              <text x="760" y="190" text-anchor="middle" font-weight="800">Safety Recommendations</text>
+              <text x="760" y="215" text-anchor="middle" font-size="13" opacity="0.85">Actions for authorities</text>
+
+              <path d="M280 195 L310 195" stroke="rgba(230,240,255,0.65)" fill="none" marker-end="url(#arrow)"/>
+              <path d="M600 195 L620 195" stroke="rgba(230,240,255,0.65)" fill="none" marker-end="url(#arrow)"/>
+              <path d="M725 110 C725 125, 725 135, 595 150" stroke="rgba(0,220,170,0.55)" fill="none" marker-end="url(#arrow)"/>
+            </g>
+          </svg>
+        </div>
+        <div class="footer">
+          <span>Input → model → hotspot → actions</span>
+          <span class="progress">Next: ML results</span>
+        </div>
+      </section>
+
+      <!-- 5 ML Models -->
+      <section class="slide" data-on="4">
+        <div class="tag">ML Model</div>
+        <h2 style="margin-top:14px;">Severity classification</h2>
+        <div class="grid2">
+          <div class="card reveal">
+            <b>Compared models</b>
+            <ul>
+              <li>Logistic Regression</li>
+              <li>Decision Tree</li>
+              <li><b>Random Forest</b> (best)</li>
+            </ul>
+          </div>
+          <div class="card reveal">
+            <b>Key metrics (from training notebook)</b>
+            <ul>
+              <li>Random Forest best test accuracy: <b>0.8458</b></li>
+              <li>Logistic Regression: <b>0.8454</b></li>
+              <li>Decision Tree: <b>0.7537</b></li>
+            </ul>
+          </div>
+        </div>
+        <div class="card reveal" style="margin-top:22px;">
+          <b style="display:block; margin-bottom:10px;">Model comparison (test set)</b>
+          <img class="img" alt="Model comparison" src="output/screenshots/Model comparison on test set.png" onerror="this.style.display='none';" />
+          <p class="muted" style="font-size:14px; margin-top:10px;">(If the image doesn’t load from your environment, copy screenshots into the same relative path.)</p>
+        </div>
+        <div class="footer">
+          <span>Best baseline selected for downstream insights</span>
+          <span class="progress">Next: evaluation</span>
+        </div>
+      </section>
+
+      <!-- 6 Evaluation -->
+      <section class="slide" data-on="5">
+        <div class="tag">Evaluation</div>
+        <h2 style="margin-top:14px;">How well the classifier works</h2>
+        <div class="grid2">
+          <div class="card reveal">
+            <b>Metrics used</b>
+            <ul>
+              <li>Accuracy</li>
+              <li>Weighted Precision / Recall / F1</li>
+              <li>Classification report</li>
+              <li>Confusion matrix</li>
+            </ul>
+          </div>
+          <div class="card reveal">
+            <b>Interpretation</b>
+            <ul>
+              <li>High recall suggests the model captures most severity cases</li>
+              <li>Imbalance can cause false positives / weaker minority-class performance</li>
+            </ul>
+          </div>
+        </div>
+        <div class="card reveal" style="margin-top:22px;">
+          <b style="display:block; margin-bottom:10px;">Confusion Matrix — Random Forest</b>
+          <img class="img" alt="Confusion Matrix" src="output/screenshots/Confusion Matrix - Random Forest.png" onerror="this.style.display='none';" />
+        </div>
+        <div class="footer">
+          <span>Next: explain the drivers</span>
+          <span class="progress">Next slide →</span>
+        </div>
+      </section>
+
+      <!-- 7 Feature importance -->
+      <section class="slide" data-on="6">
+        <div class="tag">Explainability</div>
+        <h2 style="margin-top:14px;">Top features driving severity</h2>
+        <div class="grid2">
+          <div class="card reveal">
+            <b>Feature importance (Random Forest)</b>
+            <p class="muted" style="font-size:16px;">Most influential predictors include:</p>
+            <ul>
+              <li><b>Time</b></li>
+              <li><b>Cause_of_accident</b></li>
+              <li><b>Day_of_week</b></li>
+              <li><b>Type_of_vehicle</b></li>
+              <li><b>Area_accident_occured</b></li>
+            </ul>
+          </div>
+          <div class="card reveal">
+            <b>Why this matters</b>
+            <ul>
+              <li>Helps stakeholders focus on <b>actionable risk factors</b></li>
+              <li>Connects ML predictions to real-world interventions</li>
+            </ul>
+          </div>
+        </div>
+        <div class="card reveal" style="margin-top:22px;">
+          <b style="display:block; margin-bottom:10px;">Top 10 important features</b>
+          <img class="img" alt="Top 10 features" src="output/screenshots/Top 10 important features.png" onerror="this.style.display='none';" />
+        </div>
+        <div class="footer">
+          <span>From prediction → actionable insight</span>
+          <span class="progress">Next: hotspot patterns</span>
+        </div>
+      </section>
+
+      <!-- 8 Hotspot patterns -->
+      <section class="slide" data-on="7">
+        <div class="tag">Hotspot Analysis</div>
+        <h2 style="margin-top:14px;">Where severity increases</h2>
+        <div class="grid2">
+          <div class="card reveal">
+            <b>Hotspot signals used in notebook</b>
+            <ul>
+              <li>Weather conditions</li>
+              <li>Road surface conditions</li>
+              <li>Light conditions</li>
+              <li>Driver age group</li>
+              <li>Driver experience</li>
+              <li>Cause of accident</li>
+            </ul>
+          </div>
+          <div class="card reveal">
+            <b>What the EDA found</b>
+            <ul>
+              <li>Most accidents are <b>Slight Injury</b>, but severe cases need attention</li>
+              <li>Adverse conditions (rain/poor visibility) can shift proportions toward serious outcomes</li>
+            </ul>
+          </div>
+        </div>
+        <div class="card reveal" style="margin-top:22px;">
+          <b style="display:block; margin-bottom:10px;">Light Condition vs Accident Severity</b>
+          <img class="img" alt="Light vs severity" src="output/screenshots/Light Condition vs Accident Severity.png" onerror="this.style.display='none';" />
+        </div>
+        <div class="footer">
+          <span>Next: turn patterns into recommendations</span>
+          <span class="progress">Next slide →</span>
+        </div>
+      </section>
+
+      <!-- 9 Recommendations -->
+      <section class="slide" data-on="8">
+        <div class="tag">Safety Recommendations</div>
+        <h2 style="margin-top:14px;">Actionable outputs for authorities</h2>
+        <div class="grid2">
+          <div class="card reveal">
+            <b>Generated recommendation mapping</b>
+            <p class="muted" style="font-size:16px;">From hotspot risk factors → recommended interventions:</p>
+            <ul>
+              <li><b>Rainy Weather</b> → Reduce speed limits during rain</li>
+              <li><b>Poor Lighting</b> → Install additional street lights</li>
+              <li><b>Driver Inattention</b> → Increase awareness campaigns</li>
+              <li><b>Wet Roads</b> → Improve road maintenance</li>
+              <li><b>Young Drivers</b> → Provide defensive driving training</li>
+            </ul>
+          </div>
+          <div class="card reveal">
+            <b>Why these actions</b>
+            <ul>
+              <li>Addresses visibility, friction, and human-factor risks</li>
+              <li>Targets scenarios where severity shifts upward</li>
+              <li>Supports policy planning and enforcement priorities</li>
+            </ul>
+          </div>
+        </div>
+        <div class="card reveal" style="margin-top:22px;">
+          <b style="display:block; margin-bottom:10px;">Output file</b>
+          <p style="margin:0; font-size:16px;">A CSV is created: <b>output/safety_recommendations.csv</b></p>
+        </div>
+        <div class="footer">
+          <span>Next: limitations &amp; future scope</span>
+          <span class="progress">Next slide →</span>
+        </div>
+      </section>
+
+      <!-- 10 Wrap up -->
+      <section class="slide" data-on="9">
+        <div class="tag">Conclusion</div>
+        <h2 style="margin-top:14px;">Responsible use &amp; next steps</h2>
+        <div class="grid2">
+          <div class="card reveal">
+            <b>Limitations</b>
+            <ul>
+              <li>Based on historical data (not real-time traffic)</li>
+              <li>No GPS-based hotspot mapping</li>
+              <li>Performance depends on data quality &amp; completeness</li>
+              <li>Predictions support decisions; they don’t replace experts</li>
+            </ul>
+          </div>
+          <div class="card reveal">
+            <b>Future scope</b>
+            <ul>
+              <li>Streamlit dashboard for severity input → recommendations</li>
+              <li>Live traffic API + weather API integration</li>
+              <li>GPS hotspot visualization</li>
+              <li>Try stronger models (XGBoost/LightGBM) or deep learning</li>
+            </ul>
+          </div>
+        </div>
+        <div class="card reveal" style="margin-top:22px;">
+          <b>Final takeaway</b>
+          <p class="muted" style="font-size:16px;">A complete workflow from EDA → ML severity prediction → hotspot pattern mining → targeted safety recommendations.</p>
+        </div>
+        <div class="footer">
+          <span>Thank you • Demo-ready deck</span>
+          <span class="progress">End</span>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+<script>
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  const total = slides.length;
+  const slideIndexEl = document.getElementById('slideIndex');
+  const slideTotalEl = document.getElementById('slideTotal');
+  slideTotalEl.textContent = total;
+
+  let current = 0;
+
+  function setActive(idx) {
+    slides.forEach((s,i)=>s.classList.toggle('active', i===idx));
+    current = idx;
+    slideIndexEl.textContent = idx+1;
+    // reset reveal
+    slides.forEach(s => s.querySelectorAll('.reveal').forEach(el => { el.classList.remove('on'); }));
+
+    // turn on reveals sequentially for the active slide
+    const active = slides[idx];
+    const revealEls = Array.from(active.querySelectorAll('.reveal'));
+    revealEls.forEach((el, i) => {
+      setTimeout(()=> el.classList.add('on'), 220 + i*180);
+    });
+  }
+
+  document.getElementById('prevBtn').addEventListener('click', ()=>{
+    setActive((current-1+total)%total);
+  });
+  document.getElementById('nextBtn').addEventListener('click', ()=>{
+    setActive((current+1)%total);
+  });
+
+  function next(){ setActive((current+1)%total); }
+  function prev(){ setActive((current-1+total)%total); }
+
+  document.addEventListener('keydown', (e)=>{
+    const k = e.key;
+    if(k==='ArrowRight' || k===' ' || k==='Enter') { e.preventDefault(); next(); }
+    if(k==='ArrowLeft') { e.preventDefault(); prev(); }
+    if(k==='Home') { e.preventDefault(); setActive(0); }
+  });
+</script>
+</body>
+</html>
+
